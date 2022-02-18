@@ -1,4 +1,5 @@
 const [...btns] = document.querySelectorAll(".btn");
+const clone = document.querySelector('.clone')
 const content = document.querySelector(".content");
 const redBtn = document.getElementById("red");
 const orangeBtn = document.getElementById("orange");
@@ -24,9 +25,7 @@ orangeBtn.addEventListener("click", (e) => {
 });
 
 yellowBtn.addEventListener("click", (e) => {
-    //   btns[btns.length - 1].innerHTML = `Меня поменяли (`;
-    // или так
-    purpleBtn.innerHTML = `Меня поменяли (`;
+  purpleBtn.innerHTML = `Меня поменяли (`;
 
 });
 
@@ -34,11 +33,14 @@ greenBtn.addEventListener("click", (e) => {
   content.classList.toggle("show");
 });
 
-cyanBtn.addEventListener("click", (e) => {
-  const temp = cyanBtn.cloneNode(true);
-  btns.splice(4, 0, temp); // для работы оранжевой кнопки
-  cyanBtn.insertAdjacentElement("afterend", temp);
-});
+clone.addEventListener('click', evt => {
+
+  if(evt.target.dataset.cyan === 'true') {
+    const temp = cyanBtn.cloneNode(true);
+    btns.splice(4, 0, temp); // для работы оранжевой кнопки
+    cyanBtn.insertAdjacentElement("afterend", temp);
+  }
+})
 
 blueBtn.addEventListener("click", (e) => {
   btns[0].classList.add("delete");
@@ -57,12 +59,11 @@ purpleBtn.addEventListener("click", (e) => {
         `
     );
   } else {
-      // или redBtn
-    btns[0].classList.remove("delete");
-    btns[0].classList.remove("hide");
-    btns[0].classList.add("grow");
+    redBtn.classList.remove("delete");
+    redBtn.classList.remove("hide");
+    redBtn.classList.add("grow");
     setTimeout(() => {
-      btns[0].classList.remove("grow");
+      redBtn.classList.remove("grow");
     }, 1500);
     visible = true;
   }
